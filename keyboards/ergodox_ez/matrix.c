@@ -119,19 +119,10 @@ uint8_t matrix_scan(void) {
       mcp23018_status = init_mcp23018();
       if (mcp23018_status) {
         print("left side not responding\n");
-      } else {
-        print("left side attached\n");
-        ergodox_blink_all_leds();
-#ifdef RGB_MATRIX_ENABLE
-        rgb_matrix_init(); // re-init driver on reconnect
-#endif
       }
     }
   }
 
-#ifdef LEFT_LEDS
-  mcp23018_status = ergodox_left_leds_update();
-#endif  // LEFT_LEDS
   bool changed = false;
   for (uint8_t i = 0; i < MATRIX_ROWS_PER_SIDE; i++) {
     // select rows from left and right hands
