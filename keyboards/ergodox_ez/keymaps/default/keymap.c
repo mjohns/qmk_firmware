@@ -67,7 +67,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
 [L_THUMB_L] = LAYOUT_tracer(
-    _______,   LCTL(KC_UP), KC_END,   _______,   _______,           LALT(LCTL(LGUI(KC_Y))),     KC_PGUP,    _______,   _______,   _______,
+    _______,   LCTL(KC_UP), KC_END,   _______,   _______,           LALT(LCTL(LGUI(KC_Y))),     KC_PGUP,    LALT(LCTL(LGUI(KC_I))),   LALT(LCTL(LGUI(KC_O))),   _______,
     _______,   _______,   KC_PGDOWN,   _______,   _______,           KC_LEFT,                  KC_DOWN,    KC_UP,   KC_RIGHT,   _______,
     _______,   _______,   LGUI(KC_C),  LGUI(KC_V),   KC_HOME,           LGUI(KC_V),   LALT(LCTL(LGUI(KC_M))),   _______,   _______,   _______,
                _______,   _______,                                                       _______,   _______,
