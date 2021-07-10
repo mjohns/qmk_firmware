@@ -21,9 +21,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_A,         KC_S,    KC_D,    LT(L_NUMBERS, KC_F), KC_G,                    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN,
     LSFT_T(KC_Z), KC_X,    KC_C,    KC_V,                KC_B,                    KC_N,    KC_M,    KC_COMM, KC_DOT,  RSFT_T(KC_SLSH),
                   KC_LALT,    MO(L_SYMBOLS),                                                      MO(L_SYMBOLS),    KC_LALT,
-                                        KC_ESC,                                   KC_TAB,
+                                        KC_LGUI,                                   KC_TAB,
                       MO(L_THUMB_L),    MO(L_SHIFT),    KC_RCTL,                KC_RCTL, LT(L_THUMB_R, KC_ENTER),   KC_SPACE,
-                                        KC_LGUI,                                KC_LGUI
+                                        KC_LCTL,                                KC_LCTL
     ),
 
 [L_SYMBOLS] = LAYOUT_tracer(
@@ -60,16 +60,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     LSFT(KC_Q),  LSFT(KC_W),    LSFT(KC_E),    LSFT(KC_R),   LSFT(KC_T),                    LSFT(KC_Y),    LSFT(KC_U),    LSFT(KC_I),    LSFT(KC_O),    LSFT(KC_P),
     LSFT(KC_A),  LSFT(KC_S),    LSFT(KC_D),    LSFT(KC_F),   LSFT(KC_G),                    LSFT(KC_H),    LSFT(KC_J),    LSFT(KC_K),    LSFT(KC_L),    LSFT(KC_SCLN),
     LSFT(KC_Z),  LSFT(KC_X),    LSFT(KC_C),    LSFT(KC_V),   LSFT(KC_B),                    LSFT(KC_N),    LSFT(KC_M),    LSFT(KC_COMM), LSFT(KC_DOT),  LSFT(KC_SLSH),
-               _______,   _______,                                                       _______,   _______,
+                          _______,   _______,                                                                             _______,   _______,
                                                 _______,           KC_DELETE,
                           _______,   _______,   _______,           KC_UNDS,   KC_BSPACE,   _______,
                                                _______,            _______
     ),
 
 [L_THUMB_L] = LAYOUT_tracer(
-    _______,   LCTL(KC_UP), KC_END,   _______,   _______,           LALT(LCTL(LGUI(KC_Y))),     KC_PGUP,    LALT(LCTL(LGUI(KC_I))),   LALT(LCTL(LGUI(KC_O))),   _______,
-    _______,   _______,   KC_PGDOWN,   _______,   _______,           KC_LEFT,                  KC_DOWN,    KC_UP,   KC_RIGHT,   _______,
-    _______,   _______,   LGUI(KC_C),  LGUI(KC_V),   KC_HOME,           LGUI(KC_V),   LALT(LCTL(LGUI(KC_M))),   _______,   _______,   _______,
+    _______,   MY_ALT_TAB, KC_END,   _______,   _______,           LALT(LCTL(LGUI(KC_Y))),     KC_PGUP,    LALT(LCTL(LGUI(KC_I))),   LALT(LCTL(LGUI(KC_O))),   _______,
+    _______,   _______,   KC_PGDOWN,   _______,   _______,         KC_LEFT,                    KC_DOWN,    KC_UP,   KC_RIGHT,   _______,
+    _______,   _______,   LCTL(KC_C),  LCTL(KC_V),   KC_HOME,      LSFT(KC_INSERT),            LALT(LCTL(LGUI(KC_M))),   _______,   _______,   _______,
                _______,   _______,                                                       _______,   _______,
                                                 _______,           KC_DELETE,
                           _______,   _______,   _______,           MY_ALT_TAB,  KC_TAB,   KC_ESC,
@@ -194,7 +194,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
       if (record->event.pressed) {
         if (!alt_tabbing) {
           alt_tabbing = true;
-          SEND_STRING(SS_DOWN(X_LGUI)SS_TAP(X_TAB));
+          SEND_STRING(SS_DOWN(X_LALT)SS_TAP(X_TAB));
         } else {
           SEND_STRING(SS_TAP(X_TAB));
         }
@@ -202,7 +202,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
       break;
     case MO(L_THUMB_L):
       if (!record->event.pressed && alt_tabbing) {
-        SEND_STRING(SS_TAP(X_LGUI));
+        SEND_STRING(SS_TAP(X_LALT));
         alt_tabbing = false;
       }
       break;
