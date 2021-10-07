@@ -10,7 +10,7 @@
 #define L_THUMB_R 6
 
 
-#define LAYOUT_tracer(                                            \
+#define LAYOUT_tracer_nonstd(                                            \
     LQ,LW,LE,LR,LT,         RY,RU,RI,RO,RP,  \
     LA,LS,LD,LF,LG,         RH,RJ,RK,RL,RCOLON,  \
     LZ,LX,LC,LV,LB,         RN,RM,RCOMMA,RPERIOD,RQUESTION,  \
@@ -27,6 +27,26 @@
     { KC_NO, LW, LS, LX, L62, KC_NO,   RO, RL, RPERIOD,      R64, KC_NO, KC_NO }, \
     { KC_NO, LQ, LA, LZ, KC_NO, KC_NO,     RP, RCOLON, RQUESTION, KC_NO, KC_NO, KC_NO }, \
    }
+
+#define LAYOUT_tracer_std(                                            \
+    LQ,LW,LE,LR,LT,         RY,RU,RI,RO,RP,  \
+    LA,LS,LD,LF,LG,         RH,RJ,RK,RL,RCOLON,  \
+    LZ,LX,LC,LV,LB,         RN,RM,RCOMMA,RPERIOD,RQUESTION,  \
+        L62,L63,                         R63,R64,      \
+                    L51,         R51,                  \
+            L40,L41,L42,         R42,R41,R40,          \
+                    L50,         R50                  )\
+   /* matrix positions */                                               \
+   {                                                                    \
+    { KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,  KC_NO, KC_NO, KC_NO,       KC_NO, KC_NO, KC_NO }, \
+    { KC_NO, LQ, LW, LE, LR, LT,       RY, RU, RI,          RO, RP, KC_NO }, \
+    { KC_NO, LA, LS, LD, LF, LG,       RH, RJ, RK,          RL, RCOLON, KC_NO }, \
+    { KC_NO, LZ, LX, LC, LV, LB,       RN, RM, RCOMMA,       RPERIOD, RQUESTION, KC_NO }, \
+    { KC_NO, KC_NO, L62, L63, KC_NO, KC_NO,   KC_NO, KC_NO, R63,      R64, KC_NO, KC_NO }, \
+    { KC_NO, L50, L41, L40, L51, L42,     R42, R51, R40, R41, R50, KC_NO }, \
+   }
+
+#define LAYOUT_tracer LAYOUT_tracer_std
 
 #define LAYOUT_tracer_stacked(                  \
     L00,L01,L02,L03,L04,       \
