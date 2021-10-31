@@ -8,9 +8,10 @@
 #define L_SHIFT 4
 #define L_THUMB_L 5
 #define L_THUMB_R 6
+#define L_SHIFT_FUNCTION 7
 
 
-#define LAYOUT_tracer_nonstd(                                            \
+#define LAYOUT_tracer_std(                                            \
     LQ,LW,LE,LR,LT,         RY,RU,RI,RO,RP,  \
     LA,LS,LD,LF,LG,         RH,RJ,RK,RL,RCOLON,  \
     LZ,LX,LC,LV,LB,         RN,RM,RCOMMA,RPERIOD,RQUESTION,  \
@@ -35,7 +36,8 @@
     { KC_NO, RY, RU, RI, RO, RP }, \
    }
 
-#define LAYOUT_tracer_std(                                            \
+// Kalih Brown switches
+#define LAYOUT_tracer_nonstd(                                            \
     LQ,LW,LE,LR,LT,         RY,RU,RI,RO,RP,  \
     LA,LS,LD,LF,LG,         RH,RJ,RK,RL,RCOLON,  \
     LZ,LX,LC,LV,LB,         RN,RM,RCOMMA,RPERIOD,RQUESTION,  \
@@ -45,12 +47,19 @@
                     L50,         R50                  )\
    /* matrix positions */                                               \
    {                                                                    \
-    { KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,  KC_NO, KC_NO, KC_NO,       KC_NO, KC_NO, KC_NO }, \
-    { KC_NO, LQ, LW, LE, LR, LT,       RY, RU, RI,          RO, RP, KC_NO }, \
-    { KC_NO, LA, LS, LD, LF, LG,       RH, RJ, RK,          RL, RCOLON, KC_NO }, \
-    { KC_NO, LZ, LX, LC, LV, LB,       RN, RM, RCOMMA,       RPERIOD, RQUESTION, KC_NO }, \
-    { KC_NO, KC_NO, L62, L63, KC_NO, KC_NO,   KC_NO, KC_NO, R63,      R64, KC_NO, KC_NO }, \
-    { KC_NO, L50, L41, L40, L51, L42,     R42, R51, R40, R41, R50, KC_NO }, \
+    { KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO }, \
+    { KC_NO, L51, KC_NO, LV, LF, LR }, \
+    { KC_NO, L42, KC_NO, LB, LG, LT }, \
+    { KC_NO, L40, L63, LC, LD, LE }, \
+    { KC_NO, L41, L62, LX, LS, LW }, \
+    { KC_NO, L50, KC_NO, LZ, LA, LQ }, \
+\
+    { KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO }, \
+    { KC_NO, KC_NO, R42, RN, RH, RY }, \
+    { KC_NO, KC_NO, R51, RM, RJ, RU }, \
+    { KC_NO, R63, R40, RCOMMA, RK, RI }, \
+    { KC_NO, R64, R41, RPERIOD, RL, RO }, \
+    { KC_NO, KC_NO, R50, RQUESTION, RCOLON, RP }, \
    }
 
 #define LAYOUT_tracer LAYOUT_tracer_nonstd
@@ -92,11 +101,13 @@ enum custom_keycodes {
   #define MY_LCTL LGUI
   #define MY_WIN_PICKER LCTL(KC_UP)
   #define MY_SHIFT_INSERT LGUI(KC_V)
+  #define MY_CTL_ALT_DELETE LALT(LGUI(KC_ESC))
 #else
   #define MY_KC_LCTL KC_LCTL
   #define MY_LCTL LCTL
   #define MY_WIN_PICKER MY_ALT_TAB
   #define MY_SHIFT_INSERT LSFT(KC_INSERT)
+  #define MY_CTL_ALT_DELETE LALT(LCTL(KC_DELETE))
 #endif
 
 
@@ -130,7 +141,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [L_SYMBOLS] = LAYOUT_tracer(
     _______, KC_LCBR, KC_UNDS, KC_RCBR, KC_PERC,                 KC_AT,   KC_EXLM,  KC_EQUAL, KC_KP_PLUS, _______,
     KC_DQUO, KC_LPRN, KC_ASTR, KC_RPRN, KC_AMPR,                 KC_PIPE, KC_LABK, KC_MINUS, KC_RABK,     KC_QUOTE,
-    _______, KC_LBRC, KC_DLR,  KC_RBRC, KC_HASH,                 KC_CIRC, KC_TILD, KC_GRAVE, _______,     KC_BSLASH,
+    KC_LSHIFT, KC_LBRC, KC_DLR,  KC_RBRC, KC_HASH,                 KC_CIRC, KC_TILD, KC_GRAVE, _______,     KC_BSLASH,
              _______, _______,                                                     _______, _______,
                                         _______,                 _______,
                       _______, _______, _______,                 _______, _______, _______,
@@ -150,12 +161,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [L_FUNCTION] = LAYOUT_tracer(
     _______,   _______,   _______,   _______,   _______,           KC_F12,   KC_F7,   KC_F8,   KC_F9,   _______,
     _______,   _______,   _______,   _______,   _______,           KC_F11,   KC_F4,   KC_F5,   KC_F6,   _______,
-    _______,   _______,   _______,   _______,   _______,           KC_F10,   KC_F1,   KC_F2,   KC_F3,   _______,
+    OSL(L_SHIFT_FUNCTION),   _______,   _______,   _______,   _______,           KC_F10,   KC_F1,   KC_F2,   KC_F3,   _______,
                _______,   _______,                                                       _______,   _______,
                                                 _______,           _______,
                           _______,   _______,   _______,           _______,   _______,   _______,
                                                _______,            _______
     ),
+
 
 [L_SHIFT] = LAYOUT_tracer_stacked(
     LSFT(KC_Q),  LSFT(KC_W),    LSFT(KC_E),    LSFT(KC_R),   LSFT(KC_T),
@@ -189,12 +201,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
 [L_THUMB_R] = LAYOUT_tracer(
-    RESET,   _______,   _______,   _______,       _______,           _______,   _______,   _______,   _______,   _______,
-    _______,   _______,   _______,   MO(L_FUNCTION),_______,           _______,   _______,   _______,   _______,   _______,
+    MY_CTL_ALT_DELETE,   _______,   _______,   _______,       _______,           _______,   _______,   _______,   _______,   _______,
+    _______,   _______,   _______,   OSL(L_FUNCTION),_______,           _______,   _______,   _______,   _______,   _______,
     _______,   _______,   _______,   _______,   _______,               _______,   _______,   _______,   _______,   _______,
                _______,   _______,                                                       _______,   _______,
                                                 _______,           _______,
                           _______,   KC_DELETE, _______,           _______,   _______,   _______,
+                                               _______,            _______
+    ),
+[L_SHIFT_FUNCTION] = LAYOUT_tracer(
+    _______,   _______,   _______,   _______,   _______,           LSFT(KC_F12),   LSFT(KC_F7),   LSFT(KC_F8),   LSFT(KC_F9),   _______,
+    _______,   _______,   _______,   _______,   _______,           LSFT(KC_F11),   LSFT(KC_F4),   LSFT(KC_F5),   LSFT(KC_F6),   _______,
+    _______,   _______,   _______,   _______,   _______,           LSFT(KC_F10),   LSFT(KC_F1),   LSFT(KC_F2),   LSFT(KC_F3),   _______,
+               _______,   _______,                                                       _______,   _______,
+                                                _______,           _______,
+                          _______,   _______,   _______,           _______,   _______,   _______,
                                                _______,            _______
     ),
 };
