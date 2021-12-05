@@ -11,6 +11,7 @@
 #define L_SHIFT_FUNCTION 7
 
 
+// Kalih Brown switches
 #define LAYOUT_tracer_std(                                            \
     LQ,LW,LE,LR,LT,         RY,RU,RI,RO,RP,  \
     LA,LS,LD,LF,LG,         RH,RJ,RK,RL,RCOLON,  \
@@ -36,7 +37,7 @@
     { KC_NO, RY, RU, RI, RO, RP }, \
    }
 
-// Kalih Brown switches
+// Cherry mx switches
 #define LAYOUT_tracer_nonstd(                                            \
     LQ,LW,LE,LR,LT,         RY,RU,RI,RO,RP,  \
     LA,LS,LD,LF,LG,         RH,RJ,RK,RL,RCOLON,  \
@@ -95,7 +96,7 @@ enum custom_keycodes {
   RGB_SLD
 };
 
-#define MY_IS_MAC
+// #define MY_IS_MAC
 #ifdef MY_IS_MAC
   #define MY_KC_LCTL KC_LGUI
   #define MY_LCTL LGUI
