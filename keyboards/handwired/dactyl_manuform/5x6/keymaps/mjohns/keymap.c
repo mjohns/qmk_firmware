@@ -63,7 +63,7 @@
     { KC_NO, KC_NO, R50, RQUESTION, RCOLON, RP }, \
    }
 
-#define LAYOUT_tracer LAYOUT_tracer_nonstd
+#define LAYOUT_tracer LAYOUT_tracer_std
 
 #define LAYOUT_tracer_stacked(                  \
     L00,L01,L02,L03,L04,       \
