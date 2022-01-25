@@ -38,7 +38,7 @@
    }
 
 // Cherry mx switches
-#define LAYOUT_tracer_nonstd(                                            \
+#define LAYOUT_tracer_cherry1(                                            \
     LQ,LW,LE,LR,LT,         RY,RU,RI,RO,RP,  \
     LA,LS,LD,LF,LG,         RH,RJ,RK,RL,RCOLON,  \
     LZ,LX,LC,LV,LB,         RN,RM,RCOMMA,RPERIOD,RQUESTION,  \
@@ -63,7 +63,33 @@
     { KC_NO, KC_NO, R50, RQUESTION, RCOLON, RP }, \
    }
 
-#define LAYOUT_tracer LAYOUT_tracer_std
+// Cherry mx switches 2. With micro usb cable out. Latest build.
+#define LAYOUT_tracer_cherry2(                                            \
+    LQ,LW,LE,LR,LT,         RY,RU,RI,RO,RP,  \
+    LA,LS,LD,LF,LG,         RH,RJ,RK,RL,RCOLON,  \
+    LZ,LX,LC,LV,LB,         RN,RM,RCOMMA,RPERIOD,RQUESTION,  \
+        L62,L63,                         R63,R64,      \
+                    L51,         R51,                  \
+            L40,L41,L42,         R42,R41,R40,          \
+                    L50,         R50                  )\
+   /* matrix positions */                                               \
+   {                                                                    \
+    { KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO }, \
+    { KC_NO, L42,   KC_NO, LB,    LG,    LT }, \
+    { KC_NO, L51,   KC_NO, LV,    LF,    LR }, \
+    { KC_NO, L40,   L63,   LC,    LD,    LE }, \
+    { KC_NO, L41,   L62,   LX,    LS,    LW }, \
+    { KC_NO, L50,   KC_NO, LZ,    LA,    LQ }, \
+\
+    { KC_NO, KC_NO, KC_NO, KC_NO,    KC_NO,   KC_NO }, \
+    { KC_NO, R42, KC_NO,   RN,       RH,      RY }, \
+    { KC_NO, R51, KC_NO,   RM,       RJ,      RU }, \
+    { KC_NO, R40,   R63,   RCOMMA,   RK,      RI }, \
+    { KC_NO, R41,   R64,   RPERIOD,  RL,      RO }, \
+    { KC_NO, R50, KC_NO,   RQUESTION, RCOLON, RP }, \
+   }
+
+#define LAYOUT_tracer LAYOUT_tracer_cherry2
 
 #define LAYOUT_tracer_stacked(                  \
     L00,L01,L02,L03,L04,       \
@@ -202,7 +228,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
 [L_THUMB_R] = LAYOUT_tracer(
-    MY_CTL_ALT_DELETE,   _______,   _______,   _______,       _______,           _______,   _______,   _______,   _______,   _______,
+    MY_CTL_ALT_DELETE,   _______,   KC_END,   _______,       _______,           _______,   _______,   _______,   _______,   KC_PSCR,
     _______,   _______,   _______,   OSL(L_FUNCTION),_______,           _______,   _______,   _______,   _______,   _______,
     _______,   _______,   _______,   _______,   _______,               _______,   _______,   _______,   _______,   _______,
                _______,   _______,                                                       _______,   _______,
