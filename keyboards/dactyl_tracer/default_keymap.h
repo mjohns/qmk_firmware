@@ -1,5 +1,7 @@
 #include QMK_KEYBOARD_H
+#include "dactyl_tracer.h"
 #include "version.h"
+#include "quantum.h"
 
 #define L_BASE 0
 #define L_SYMBOLS 1
@@ -8,6 +10,7 @@
 #define L_SHIFT 4
 #define L_THUMB_L 5
 #define L_THUMB_R 6
+#define L_SHIFT_FUNCTION 7
 
 enum custom_keycodes {
   MY_ALT_TAB = SAFE_RANGE,
@@ -15,28 +18,20 @@ enum custom_keycodes {
   RGB_SLD
 };
 
-// #define MY_IS_MAC
+#define MY_IS_MAC
 #ifdef MY_IS_MAC
   #define MY_KC_LCTL KC_LGUI
   #define MY_LCTL LGUI
   #define MY_WIN_PICKER LCTL(KC_UP)
   #define MY_SHIFT_INSERT LGUI(KC_V)
+  #define MY_CTL_ALT_DELETE LALT(LGUI(KC_ESC))
 #else
   #define MY_KC_LCTL KC_LCTL
   #define MY_LCTL LCTL
   #define MY_WIN_PICKER MY_ALT_TAB
   #define MY_SHIFT_INSERT LSFT(KC_INSERT)
+  #define MY_CTL_ALT_DELETE LALT(LCTL(KC_DELETE))
 #endif
-
-#ifdef MY_IS_MAC
-  #define LAYOUT_tracer LAYOUT_tracer_custom_
-  #define LAYOUT_tracer_stacked LAYOUT_tracer_custom_stacked
-#else
-  #define LAYOUT_tracer LAYOUT_tracer_std
-  #define LAYOUT_tracer_stacked LAYOUT_tracer_std_stacked
-#endif
-
-
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -67,7 +62,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [L_SYMBOLS] = LAYOUT_tracer(
     _______, KC_LCBR, KC_UNDS, KC_RCBR, KC_PERC,                 KC_AT,   KC_EXLM,  KC_EQUAL, KC_KP_PLUS, _______,
     KC_DQUO, KC_LPRN, KC_ASTR, KC_RPRN, KC_AMPR,                 KC_PIPE, KC_LABK, KC_MINUS, KC_RABK,     KC_QUOTE,
-    _______, KC_LBRC, KC_DLR,  KC_RBRC, KC_HASH,                 KC_CIRC, KC_TILD, KC_GRAVE, _______,     KC_BSLASH,
+    KC_LSHIFT, KC_LBRC, KC_DLR,  KC_RBRC, KC_HASH,                 KC_CIRC, KC_TILD, KC_GRAVE, _______,     KC_BSLASH,
              _______, _______,                                                     _______, _______,
                                         _______,                 _______,
                       _______, _______, _______,                 _______, _______, _______,
@@ -87,14 +82,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [L_FUNCTION] = LAYOUT_tracer(
     _______,   _______,   _______,   _______,   _______,           KC_F12,   KC_F7,   KC_F8,   KC_F9,   _______,
     _______,   _______,   _______,   _______,   _______,           KC_F11,   KC_F4,   KC_F5,   KC_F6,   _______,
-    _______,   _______,   _______,   _______,   _______,           KC_F10,   KC_F1,   KC_F2,   KC_F3,   _______,
+    OSL(L_SHIFT_FUNCTION),   _______,   _______,   _______,   _______,           KC_F10,   KC_F1,   KC_F2,   KC_F3,   _______,
                _______,   _______,                                                       _______,   _______,
                                                 _______,           _______,
                           _______,   _______,   _______,           _______,   _______,   _______,
                                                _______,            _______
     ),
 
-[L_SHIFT] = LAYOUT_tracer(
+
+[L_SHIFT] = LAYOUT_tracer_stacked(
     LSFT(KC_Q),  LSFT(KC_W),    LSFT(KC_E),    LSFT(KC_R),   LSFT(KC_T),
     LSFT(KC_A),  LSFT(KC_S),    LSFT(KC_D),    LSFT(KC_F),   LSFT(KC_G),
     LSFT(KC_Z),  LSFT(KC_X),    LSFT(KC_C),    LSFT(KC_V),   LSFT(KC_B),
@@ -126,18 +122,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
 [L_THUMB_R] = LAYOUT_tracer(
-    RESET,   _______,   _______,   _______,       _______,           _______,   _______,   _______,   _______,   _______,
-    _______,   _______,   _______,   MO(L_FUNCTION),_______,           _______,   _______,   _______,   _______,   _______,
-    _______,   _______,   _______,   _______,   _______,               _______,   _______,   _______,   _______,   _______,
+    MY_CTL_ALT_DELETE,   _______,   KC_END,   _______,       _______,           _______,   _______,   _______,   _______,   KC_PSCR,
+    _______,   _______,   _______,   OSL(L_FUNCTION),_______,           _______,   _______,   _______,   _______,   _______,
+    KC_LSFT,   _______,   _______,   _______,   _______,               _______,   _______,   _______,   _______,   _______,
                _______,   _______,                                                       _______,   _______,
                                                 _______,           _______,
                           _______,   KC_DELETE, _______,           _______,   _______,   _______,
                                                _______,            _______
     ),
+[L_SHIFT_FUNCTION] = LAYOUT_tracer(
+    _______,   _______,   _______,   _______,   _______,           LSFT(KC_F12),   LSFT(KC_F7),   LSFT(KC_F8),   LSFT(KC_F9),   _______,
+    _______,   _______,   _______,   _______,   _______,           LSFT(KC_F11),   LSFT(KC_F4),   LSFT(KC_F5),   LSFT(KC_F6),   _______,
+    _______,   _______,   _______,   _______,   _______,           LSFT(KC_F10),   LSFT(KC_F1),   LSFT(KC_F2),   LSFT(KC_F3),   _______,
+               _______,   _______,                                                       _______,   _______,
+                                                _______,           _______,
+                          _______,   _______,   _______,           _______,   _______,   _______,
+                                               _______,            _______
+    ),
 };
 
 
-bool alt_tabbing = false;
+static bool alt_tabbing = false;
 
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
   switch (keycode) {
@@ -168,5 +173,3 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
   }
   return true;
 }
-
-

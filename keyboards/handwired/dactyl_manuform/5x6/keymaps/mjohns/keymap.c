@@ -122,7 +122,7 @@ enum custom_keycodes {
   RGB_SLD
 };
 
-// #define MY_IS_MAC
+#define MY_IS_MAC
 #ifdef MY_IS_MAC
   #define MY_KC_LCTL KC_LGUI
   #define MY_LCTL LGUI
@@ -230,7 +230,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [L_THUMB_R] = LAYOUT_tracer(
     MY_CTL_ALT_DELETE,   _______,   KC_END,   _______,       _______,           _______,   _______,   _______,   _______,   KC_PSCR,
     _______,   _______,   _______,   OSL(L_FUNCTION),_______,           _______,   _______,   _______,   _______,   _______,
-    _______,   _______,   _______,   _______,   _______,               _______,   _______,   _______,   _______,   _______,
+    KC_LSFT,   _______,   _______,   _______,   _______,               _______,   _______,   _______,   _______,   _______,
                _______,   _______,                                                       _______,   _______,
                                                 _______,           _______,
                           _______,   KC_DELETE, _______,           _______,   _______,   _______,

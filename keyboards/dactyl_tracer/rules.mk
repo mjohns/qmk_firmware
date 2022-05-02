@@ -2,39 +2,21 @@
 MCU = atmega32u4
 
 # Bootloader selection
-#   Teensy       halfkay
-#   Pro Micro    caterina
-#   Atmel DFU    atmel-dfu
-#   LUFA DFU     lufa-dfu
-#   QMK DFU      qmk-dfu
-#   ATmega32A    bootloadHID
-#   ATmega328P   USBasp
-BOOTLOADER = halfkay
-
-# If you have Left LEDs (see
-# https://geekhack.org/index.php?topic=22780.msg873819#msg873819 for
-# details), include the following define:
-# OPT_DEFS += -DLEFT_LEDS
+BOOTLOADER = caterina
 
 # Build Options
-#   comment out to disable the options.
+#   change yes to no to disable
 #
-BOOTMAGIC_ENABLE = no  # Virtual DIP switch configuration
-MOUSEKEY_ENABLE  = yes # Mouse keys
-EXTRAKEY_ENABLE  = yes # Audio control and System control
-CONSOLE_ENABLE   = no  # Console for debug
-COMMAND_ENABLE   = yes # Commands for debug and configuration
-CUSTOM_MATRIX    = yes # Custom matrix file for the ErgoDox EZ
-NKRO_ENABLE      = yes # USB Nkey Rollover - if this doesn't work, see here: https://github.com/tmk/tmk_keyboard/wiki/FAQ#nkro-doesnt-work
-UNICODE_ENABLE   = yes # Unicode
-SWAP_HANDS_ENABLE= no # Allow swapping hands of keyboard
-SLEEP_LED_ENABLE = no
-API_SYSEX_ENABLE = no
-RGBLIGHT_ENABLE = no
-
-RGB_MATRIX_ENABLE = no # enable later
-DEBOUNCE_TYPE = eager_pr
-
-# project specific files
-SRC += matrix.c
-QUANTUM_LIB_SRC += i2c_master.c
+BOOTMAGIC_ENABLE = no       # Enable Bootmagic Lite
+MOUSEKEY_ENABLE = yes       # Mouse keys
+EXTRAKEY_ENABLE = yes       # Audio control and System control
+CONSOLE_ENABLE = no         # Console for debug
+COMMAND_ENABLE = yes        # Commands for debug and configuration
+# Do not enable SLEEP_LED_ENABLE. it uses the same timer as BACKLIGHT_ENABLE
+SLEEP_LED_ENABLE = no       # Breathing sleep LED during USB suspend
+# if this doesn't work, see here: https://github.com/tmk/tmk_keyboard/wiki/FAQ#nkro-doesnt-work
+NKRO_ENABLE = no            # USB Nkey Rollover
+BACKLIGHT_ENABLE = no       # Enable keyboard backlight functionality
+RGBLIGHT_ENABLE = no        # Enable keyboard RGB underglow
+AUDIO_ENABLE = no           # Audio output
+SPLIT_KEYBOARD = yes
