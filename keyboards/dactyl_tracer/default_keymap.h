@@ -18,7 +18,6 @@ enum custom_keycodes {
   RGB_SLD
 };
 
-#define MY_IS_MAC
 #ifdef MY_IS_MAC
   #define MY_KC_LCTL KC_LGUI
   #define MY_LCTL LGUI
